@@ -1,5 +1,5 @@
-.home-title {
-	color:gray;
+.Titulos {
+	color:white;
 	font-family: Lobster;
 }
 body {
@@ -13,4 +13,18 @@ p {
 }
 .center {
 	text-align: center;
+}
+
+body { 
+	padding-bottom: 100px; 
+	padding-top: 50px;
+}
+
+.Texto {
+	font-size: 28px;
+}
+
+hr {
+	background-color: red;
+	border-top: 2px dashed #8c8b8b;
 }
