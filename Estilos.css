@@ -3,5 +3,14 @@
 	font-family: Lobster;
 }
 body {
-	
+
+}
+.primary-text {
+	text-align: center;
+}
+p {
+	text-align: center;
+}
+.center {
+	text-align: center;
 }
