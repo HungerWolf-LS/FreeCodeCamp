@@ -21,10 +21,13 @@ body {
 }
 
 .Texto {
-	font-size: 28px;
+	font-size: 34px;
 }
 
 hr {
 	background-color: red;
 	border-top: 2px dashed #8c8b8b;
+}
+.texto {
+	font-size: 48px;
 }
