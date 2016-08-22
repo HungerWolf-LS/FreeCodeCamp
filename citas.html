@@ -6,6 +6,9 @@
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lobster">
 <link rel="stylesheet" type="text/css" href="http://bootswatch.com/darkly/bootstrap.min.css"> 
 <link rel="stylesheet" type="text/css" href="font-awesome-4.6.3">
+<link rel="stylesheet" href="jQuery-Ajax-Based-Random-Quote-Generator-Random-Quotes/css/quotes.css">
+	<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script src="jQuery-Ajax-Based-Random-Quote-Generator-Random-Quotes/js/quotes.js"></script>	
 	<title>Quote Maker</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA_Compatible" content="IE-edge">
@@ -45,25 +48,50 @@
 </div>
 </div>
 <hr>
-<div class="bs-docs-section">
 
+
+<div class="bs-docs-section">
+<div class="container">
 	<div class="row">
-	<div class="col-lg-12 col-md-12 col-sm-6">
+	<div class="col-md-12">
+
 	<div class="page-header">
 	<div id ="Quotes">
 		<h1 id="containers" class="title"> Quote </h1>
 		</div>
+		<div class="form-group">
+		<div class="well bs-component">
 		<div class="bs-component">
 		<div class="jumbotron">
-		<p class="texto">
-		Viva el que tenga que vivir 
-		</p>
+		<blockquote>
+			<p id="QuoteTittle">
+			Teme De Aquel Que Se Conoce A Si Mismo.</p>
+			<p>
+			Ya Que De El.
+			</p>
+			<p>
+			No Hay Nada Oculto.
+			</p>
+
+			<p id="QuoteContent"><small>
+			Uriel Solano
+			</small>
+			</p>
+
+		</blockquote>
+		<a class="btn btn-primary btn-lg btn-block add_more" id="QuoteButton">Ask me A Quote! </a>
 		</div>
+</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
 </div>
 <hr>
+
+
 <nav class="navbar  navbar-fixed-bottom">
 <div class="text-center">
 <a class="btn btn-default" href="https://github.com/HungerWolf-LS/"> GitHub</a>
@@ -72,35 +100,35 @@
 <a class="btn btn-default" href="https://plus.google.com/u/1/?hl=es">Google+</a>
 </div>
 </nav>
-
-
-
 </div>
 
+<script type="text/javascript">
+/*$('#QuoteButton').on('click',function(e){
+	e.preventDefault();
+	$.ajax( {
+		url: '/wp-json/post?filter[orderby]=rand&filter[post_per_page]=1',
+		sucess: function(data) {
+			var post = data.shift();
+			$('#QuoteTittle').text(post.title);
+			$('#QuoteContect').html(post.content);
 
 
+		if (typeof post.custom_meta !== 'undefined' && typeof post.custom_meta.Source !== 'undefined') {
+          $('#quote-source').html('Source:' + post.custom_meta.Source);
+        } else {
+          $('#quote-source').text('');
+        } 
+		};
 
+	})
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+})
+$("#QuoteButton").on('click',function(e) {
+	e.preventDefault();
+	$.getJSON("http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1&callback=", function(a) {
+  $("#QuoteTittle").append(a[0].content + "<p>— " + a[0].title + "</p>")
+});	
+});*/
+</script>
 </body>
 </html>
