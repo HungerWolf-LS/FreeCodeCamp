@@ -31,3 +31,8 @@ hr {
 .texto {
 	font-size: 48px;
 }
+.title {
+	color:white;
+	font-family: Lobster;
+	text-align: center;
+}
