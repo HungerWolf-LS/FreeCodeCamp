@@ -8,7 +8,7 @@
 <link rel="stylesheet" type="text/css" href="font-awesome-4.6.3">
 
 	<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>	
-	<script src="jQuery-Plugin-To-Show-Tweetable-Random-Quotes-On-The-Webpage-newQuotes/jquery.min.js"></script>
+	<script src="jQuery-Plugin-To-Show-Tweetable-Random-Quotes-On-The-Webpage-newQuotes/js/index.js"></script>
 	<title>Quote Maker</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA_Compatible" content="IE-edge">
@@ -57,7 +57,6 @@
 
 	<div class="page-header">
 	<div id ="Quotes">
-	<button id="btn1"> Tweet it! </button>
 		<h1 id="containers" class="title"> Quote </h1>
 		</div>
 		<div class="form-group">
@@ -65,26 +64,19 @@
 		<div class="bs-component">
 		<div class="jumbotron">
 		<blockquote>
-			<p id="QuoteTittle">
-			Teme De Aquel Que Se Conoce A Si Mismo.</p>
-			<p>
-			Ya Que De El.
-			</p>
-			<p>
-			No Hay Nada Oculto.
-			</p>
-
+		<div id="quoteArea">
+			<div id="quoteItself"></div>
 			<p id="QuoteContent"><small>
-			Uriel Solano
+			<div id="quoteAuthor"></div>
+			</div>
+			
+			by HungerWolf
 			</small>
 			</p>
 		</blockquote>
-		<div id="quoteArea">
-			<div id="quoteItself"></div>
-			<div id="quoteAuthor"></div>
-			</div>
 
-		<a class="btn btn-primary btn-lg btn-block add_more" id="btn2">Ask me A Quote! </a>
+		<a class="btn btn-primary btn-lg btn-block" id="btn2">Ask me A Quote! </a>
+	<button id="btn1" class="btn btn-default btn-block"> Tweet it! </button>
 		</div>
 </div>
 </div>
@@ -108,7 +100,112 @@
 </div>
 
 <script type="text/javascript">
-$(document).ready(function() {
+
+
+	$(document).ready(function(){
+
+	  // housekeeping: setup vars, 1st quote
+
+	  var quote = "";
+
+	  var author = "";
+
+	  changeBackground();
+
+	  createQuote();
+
+	  
+
+	 // buttons
+
+	  $("#btn1").on("click",function()
+
+	                {
+  var twitterURL = "https://twitter.com/intent/tweet?text=" + quote + " " + author;
+    window.open(twitterURL, 'twitter');
+    return false;
+  });
+
+	   
+
+	   $("#btn2").on("click",function(){
+
+	    changeBackground();
+
+	    createQuote();
+
+	  });
+
+
+
+	 // generate numbers for changing background colors
+
+  function generateRandomNum(min,max){
+
+	    return Math.floor(Math.random()*(max-min+1)+min);
+
+	  }
+
+	 
+
+	  function changeBackground(){
+
+	    var colorR = generateRandomNum(0,255);
+
+	    var colorG = generateRandomNum(0,255);
+
+	    var colorB = generateRandomNum(0,255);
+
+	    var colorA = generateRandomNum(0,4);
+
+	 
+
+	    $("#quoteArea").css("background-color","rgba("+ colorR + "," + colorG + "," + colorB + "," + colorA + ")");
+
+	 
+
+	  }
+   
+	//generate quote thru ajax call
+
+	function createQuote(){
+
+	   
+	var output = $.ajax({
+	 
+	    // The URL to the API. You can get this in the API page of the API you intend to consume
+	    url: 'https://andruxnet-random-famous-quotes.p.mashape.com/cat=famous',
+	 
+	    // The HTTP Method, can be GET POST PUT DELETE etc
+	    type: 'GET',
+	 
+	    // Additional parameters here
+	    data: {},
+	    dataType: 'json',
+	    success: function(data) {
+	      quote = data.quote;
+	      author = data.author;
+	      $("#quoteItself").html("" + quote + "");
+	      $("#quoteAuthor").html("  " + author);
+	       
+	      console.dir((data.source)); },
+	   
+	    error: function(err) { console.log(err); },
+
+	    beforeSend: function(xhr) {
+	    xhr.setRequestHeader("X-Mashape-Authorization", "8vdyiCzX3MmshyDl3zGkJz72KPySp1NguEbjsn8C4C1XHEwyec"); // Enter here your Mashape key
+
+	     }
+
+	    });
+
+	  };
+
+	})
+
+
+
+/*$(document).ready(function() {
 	var quote = "";
 	var author = "";
 	changeBackground();
@@ -176,7 +273,7 @@ $(document).ready(function() {
 			});
 		};
 	}
-});
+});*/
 
 /*$(document).on('click',function(e){
 	e.preventDefault();
