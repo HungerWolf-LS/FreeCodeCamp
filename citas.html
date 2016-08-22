@@ -104,17 +104,12 @@
 
 	$(document).ready(function(){
 
-	  // housekeeping: setup vars, 1st quote
-
 	  var quote = "";
 
 	  var author = "";
 
-	  changeBackground();
 
 	  createQuote();
-
-	  
 
 	 // buttons
 
@@ -129,8 +124,6 @@
 	   
 
 	   $("#btn2").on("click",function(){
-
-	    changeBackground();
 
 	    createQuote();
 
@@ -147,25 +140,6 @@
 	  }
 
 	 
-
-	  function changeBackground(){
-
-	    var colorR = generateRandomNum(0,255);
-
-	    var colorG = generateRandomNum(0,255);
-
-	    var colorB = generateRandomNum(0,255);
-
-	    var colorA = generateRandomNum(0,4);
-
-	 
-
-	    $("#quoteArea").css("background-color","rgba("+ colorR + "," + colorG + "," + colorB + "," + colorA + ")");
-
-	 
-
-	  }
-   
 	//generate quote thru ajax call
 
 	function createQuote(){
