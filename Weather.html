@@ -2,6 +2,7 @@
 <html>
 <head>
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"/>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <link rel="stylesheet" href="Estilos.css"/>
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lobster">
 <link rel="stylesheet" type="text/css" href="http://bootswatch.com/darkly/bootstrap.min.css"> 
@@ -85,4 +86,29 @@ var app = {};
 app.apikey = "f3bf2022915855846550162e355ce1f9";
 
 app.url = " http://api.openweathermap.org/data/2.5/find?lat=10.44&lon=-66.88&cnt=10&appid=f3bf2022915855846550162e355ce1f9";
+
+app.cargaDatos = function() {
+
+$.ajax({
+  url: app.url,
+
+  sucess: function (data) {
+
+    app.datos = data;
+
+    app.procesaDatos();
+  },
+
+  error: function() {
+
+    alert("No hay clima para ti :(");
+  }
+
+
+
+});
+
+
+}
+app.cargaDatos();
 </script>
