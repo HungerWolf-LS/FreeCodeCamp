@@ -82,10 +82,13 @@
 
 <script type="text/javascript">
 var app = {};
+//var app2 = {};
 
 app.apikey = "3e721e227b5c28d8ff5691e4fff1c36";
 
 app.url = "http://api.openweathermap.org/data/2.5/find?lat=10.44&lon=-66.902618&cnt=10.51271&appid=f3bf2022915855846550162e355ce1f9";
+
+//app2.url2 ="http://ip-api.com/json";
 
 app.cargaDatos = function() {
 
@@ -110,5 +113,25 @@ $.ajax({
 
 
 }
+
+/*app2.localizacion = function(){
+  
+  $.ajax({
+    url: app2.url2, 
+
+    sucess: function (data) {
+
+      app2.datos = data2;
+
+      app2.procesaDatos();
+
+    },
+
+  });
+
+}*/
+
+
 app.cargaDatos();
+//app2.localizacion();
 </script>
