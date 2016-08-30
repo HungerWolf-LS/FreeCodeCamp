@@ -97,8 +97,8 @@ var app = {};
 app.apikey = "3e721e227b5c28d8ff5691e4fff1c36";
 
 //app.url = "http://api.openweathermap.org/data/2.5/find?lat=10.44&lon=-66.902618&cnt=10.51271&appid=f3bf2022915855846550162e355ce1f9";
-app.url = "http://api.openweathermap.org/data/2.5/weather?q=Caracas&appid=f3bf2022915855846550162e355ce1f9";
-//app2.url2 ="http://ip-api.com/json";
+app.url = "http://api.openweathermap.org/data/2.5/weather?q="+ app.ciudad +"&appid=f3bf2022915855846550162e355ce1f9";
+app.url2 ="http://ip-api.com/json";
   app.cargaDatos = function() {
 
     $.ajax({
@@ -113,7 +113,7 @@ app.url = "http://api.openweathermap.org/data/2.5/weather?q=Caracas&appid=f3bf20
     });
   }
 app.procesaDatos = function(){
-      app.condicionNombre = app.datos.weather[0].main;
+      app.condicionNombre = app.datos.weather[0].description;
       app.temperatura = app.datos.main.temp;
       var condicionIcono = app.datos.weather[0].icon;
       app.icono = app.obtenIcono( condicionIcono );
@@ -142,7 +142,28 @@ app.obtenIcono = function(weatherIcon) {
       return icon;
     }
 
+app.localizacion = function(){
+  
+  $.ajax({
+    url: app.url2, 
 
+    success: function (data) {
+
+      app.datos = data;
+      app.coordenadas();
+      //app.procesaDatos();
+
+    },
+
+  });
+
+}
+
+app.coordenadas = function(){
+    app.ciudad = app.datos.city;
+    console.log(app.ciudad);
+    return app.ciudad;
+}
   /*  app.cargaDatos = function() {
 
     $.ajax({
@@ -186,25 +207,9 @@ app.obtenIcono = function(weatherIcon) {
     }
 */
 
-/*app2.localizacion = function(){
-  
-  $.ajax({
-    url: app2.url2, 
-
-    sucess: function (data) {
-
-      app2.datos = data2;
-
-      app2.procesaDatos();
-
-    },
-
-  });
-
-}*/
 
 
 app.cargaDatos();
 //app.procesaDatos();
-//app2.localizacion();
+app.localizacion();
 </script>
