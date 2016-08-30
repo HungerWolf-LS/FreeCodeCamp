@@ -57,8 +57,16 @@
     <div class="bs-component">
     <div class="jumbotron">
     <div class="weather">
+    <section class="section__main">
+    <div class="section__content">
+    <h2 class="title"> Caracas c: </h2>
+    <div class="weather__block Title" id="js_w_temp"> </div>
+    <div class="weather__block Title" id="js_w_icon"> </div>
+
+    </div>  
     </div>
     </div></div></div>
+    </section>
     <hr>
 
 
@@ -88,33 +96,95 @@ var app = {};
 
 app.apikey = "3e721e227b5c28d8ff5691e4fff1c36";
 
-app.url = "http://api.openweathermap.org/data/2.5/find?lat=10.44&lon=-66.902618&cnt=10.51271&appid=f3bf2022915855846550162e355ce1f9";
-
+//app.url = "http://api.openweathermap.org/data/2.5/find?lat=10.44&lon=-66.902618&cnt=10.51271&appid=f3bf2022915855846550162e355ce1f9";
+app.url = "http://api.openweathermap.org/data/2.5/weather?q=Caracas&appid=f3bf2022915855846550162e355ce1f9";
 //app2.url2 ="http://ip-api.com/json";
+  app.cargaDatos = function() {
 
-app.cargaDatos = function() {
-
-$.ajax({
-  url: app.url,
-
-  sucess: function (data) {
-
-    app.datos = data;
-
-    app.procesaDatos();
-  },
-
-  error: function() {
-
-    alert("No hay clima para ti :(");
+    $.ajax({
+      url: app.url,
+      success: function (data) {
+        app.datos = data;
+        app.procesaDatos();
+      },
+      error: function() {
+        alert("No hay clima para ti :(");
+      }
+    });
   }
+app.procesaDatos = function(){
+      app.condicionNombre = app.datos.weather[0].main;
+      app.temperatura = app.datos.main.temp;
+      var condicionIcono = app.datos.weather[0].icon;
+      app.icono = app.obtenIcono( condicionIcono );
+      app.muestra();
+     }
 
+app.muestra = function(){
+  $('#js_w_temp').append("<p class='weather_temperature'>" +  app.temperatura + "º</p>");
+  $('#js_w_icon').append(" <i class='wi " + app.icono + "'></i>");
 
-
-});
-
+  $('#js_w_icon').append("<p class='weather_name'>" +  app.condicionNombre.toUpperCase() + "</p>");
 
 }
+app.obtenIcono = function(weatherIcon) {
+      var icon;
+      switch (weatherIcon) {
+        case "01d":
+        case "01n":
+         icon = "wi-day-sunny";
+        break;
+        case "02d":
+        case "02n":
+          icon = "wi-day-cloudy";
+        break;
+      }
+      return icon;
+    }
+
+
+  /*  app.cargaDatos = function() {
+
+    $.ajax({
+      url: app.url,
+      sucess: function (data) {
+        app.datos = data;
+        app.procesaDatos();
+      },
+      error: function() {
+        alert("No hay clima para ti :(");
+      }
+    });
+  }
+    app.procesaDatos = function(){
+      app.condicionNombre = app.datos.weather[0].main;
+      app.temperatura = app.datos.main.temp, 10;
+      var condicionIcono = app.datos.weather[0].icon;
+      app.icono = app.obtenIcono( condicionIcono );
+      app.muestra();
+     }
+
+    app.obtenIcono = function(weatherIcon) {
+      var icon;
+      switch (weatherIcon) {
+        case "01d":
+        case "01n":
+         icon = "wi-day-sunny";
+        break;
+        case "02d":
+        case "02n":
+          icon = "wi-day-cloudy";
+        break;
+      }
+      return icon;
+    }
+
+    app.muestra = function(){
+      $("#js_w_temp").append("&lt;p class='weather_temperature'&gt;" + app.temperatura + "º&lt;/p&gt;");
+      $("#js_w_icon").append("&lt; i class='wi " + app.icono + "'&gt;&lt/i&gt;");
+      $("#js_w_icon").append("&lt;p class='weather_name'&gt;" + app.condicionNombre.toUpperCase() + "&lt;/p&gt;");
+    }
+*/
 
 /*app2.localizacion = function(){
   
@@ -135,5 +205,6 @@ $.ajax({
 
 
 app.cargaDatos();
+//app.procesaDatos();
 //app2.localizacion();
 </script>
