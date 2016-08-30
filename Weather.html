@@ -92,15 +92,40 @@
 
 <script type="text/javascript">
 var app = {};
-//var app2 = {};
+
+
+var ciudad = "Caracas";
 
 app.apikey = "3e721e227b5c28d8ff5691e4fff1c36";
 
 //app.url = "http://api.openweathermap.org/data/2.5/find?lat=10.44&lon=-66.902618&cnt=10.51271&appid=f3bf2022915855846550162e355ce1f9";
-app.url = "http://api.openweathermap.org/data/2.5/weather?q="+ app.ciudad +"&appid=f3bf2022915855846550162e355ce1f9";
 app.url2 ="http://ip-api.com/json";
-  app.cargaDatos = function() {
 
+
+app.localizacion = function(){
+  
+  $.ajax({
+    url: app.url2, 
+
+    success: function (data) {
+
+      app.datos = data;
+      app.ciudad = app.datos.city;
+      app.cargaDatos();
+    },
+
+  });
+
+}
+app.url = "http://api.openweathermap.org/data/2.5/weather?q="+ app.ciudad +"&appid=f3bf2022915855846550162e355ce1f9";
+
+//console.log(app.url);
+
+
+
+  app.cargaDatos = function() {
+    //console.log(ciudad);
+      //app.localizacion();
     $.ajax({
       url: app.url,
       success: function (data) {
@@ -142,74 +167,11 @@ app.obtenIcono = function(weatherIcon) {
       return icon;
     }
 
-app.localizacion = function(){
-  
-  $.ajax({
-    url: app.url2, 
-
-    success: function (data) {
-
-      app.datos = data;
-      app.coordenadas();
-      //app.procesaDatos();
-
-    },
-
-  });
-
-}
-
-app.coordenadas = function(){
-    app.ciudad = app.datos.city;
-    console.log(app.ciudad);
-    return app.ciudad;
-}
-  /*  app.cargaDatos = function() {
-
-    $.ajax({
-      url: app.url,
-      sucess: function (data) {
-        app.datos = data;
-        app.procesaDatos();
-      },
-      error: function() {
-        alert("No hay clima para ti :(");
-      }
-    });
-  }
-    app.procesaDatos = function(){
-      app.condicionNombre = app.datos.weather[0].main;
-      app.temperatura = app.datos.main.temp, 10;
-      var condicionIcono = app.datos.weather[0].icon;
-      app.icono = app.obtenIcono( condicionIcono );
-      app.muestra();
-     }
-
-    app.obtenIcono = function(weatherIcon) {
-      var icon;
-      switch (weatherIcon) {
-        case "01d":
-        case "01n":
-         icon = "wi-day-sunny";
-        break;
-        case "02d":
-        case "02n":
-          icon = "wi-day-cloudy";
-        break;
-      }
-      return icon;
-    }
-
-    app.muestra = function(){
-      $("#js_w_temp").append("&lt;p class='weather_temperature'&gt;" + app.temperatura + "º&lt;/p&gt;");
-      $("#js_w_icon").append("&lt; i class='wi " + app.icono + "'&gt;&lt/i&gt;");
-      $("#js_w_icon").append("&lt;p class='weather_name'&gt;" + app.condicionNombre.toUpperCase() + "&lt;/p&gt;");
-    }
-*/
 
 
-
-app.cargaDatos();
-//app.procesaDatos();
 app.localizacion();
+//var city = app.localizacion();
+//console.log(city);
+//app.cargaDatos();
+//app.procesaDatos();
 </script>
