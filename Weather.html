@@ -94,7 +94,6 @@
 var app = {};
 
 
-var ciudad = "Caracas";
 
 app.apikey = "3e721e227b5c28d8ff5691e4fff1c36";
 
@@ -110,24 +109,24 @@ app.localizacion = function(){
     success: function (data) {
 
       app.datos = data;
-      app.ciudad = app.datos.city;
-      app.cargaDatos();
+      city = app.datos.city;
+      console.log(city);
+      app.cargaDatos(city);
     },
 
   });
 
 }
-app.url = "http://api.openweathermap.org/data/2.5/weather?q="+ app.ciudad +"&appid=f3bf2022915855846550162e355ce1f9";
+/*app.url = "http://api.openweathermap.org/data/2.5/weather?q="+ Ciudad +"&appid=f3bf2022915855846550162e355ce1f9";*/
 
 //console.log(app.url);
 
 
-
-  app.cargaDatos = function() {
+  app.cargaDatos = function(city) {
     //console.log(ciudad);
       //app.localizacion();
     $.ajax({
-      url: app.url,
+      url: 'http://api.openweathermap.org/data/2.5/weather?q='+ city + '&appid=f3bf2022915855846550162e355ce1f9',
       success: function (data) {
         app.datos = data;
         app.procesaDatos();
