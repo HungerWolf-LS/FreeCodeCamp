@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="Estilos.css"/>
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lobster">
 <link rel="stylesheet" type="text/css" href="http://bootswatch.com/darkly/bootstrap.min.css"> 
+<link rel="stylesheet" type="text/css" href="weather-icons-master">
 <link rel="stylesheet" type="text/css" href="font-awesome-4.6.3">
 	<title>Weather Time!</title>
 <meta charset="utf-8">
@@ -59,7 +60,7 @@
     <div class="weather">
     <section class="section__main">
     <div class="section__content">
-    <h2 class="title"> Caracas c: </h2>
+    <h2 class="title" id="city"> </h2>
     <div class="weather__block Title" id="js_w_temp"> </div>
     <div class="weather__block Title" id="js_w_icon"> </div>
 
@@ -117,6 +118,8 @@ app.localizacion = function(){
   });
 
 }
+
+//http://openweathermap.org/img/w/10n.png
 /*app.url = "http://api.openweathermap.org/data/2.5/weather?q="+ Ciudad +"&appid=f3bf2022915855846550162e355ce1f9";*/
 
 //console.log(app.url);
@@ -137,35 +140,82 @@ app.localizacion = function(){
     });
   }
 app.procesaDatos = function(){
-      app.condicionNombre = app.datos.weather[0].description;
+      app.condicionNombre = app.datos.weather[0].main;
       app.temperatura = app.datos.main.temp;
       var condicionIcono = app.datos.weather[0].icon;
+      console.log(condicionIcono);
       app.icono = app.obtenIcono( condicionIcono );
+      //console.log(app.icono);
       app.muestra();
      }
 
 app.muestra = function(){
   $('#js_w_temp').append("<p class='weather_temperature'>" +  app.temperatura + "º</p>");
-  $('#js_w_icon').append(" <i class='wi " + app.icono + "'></i>");
+  $('#js_w_icon').append(" <i class='wi " + app.icon + "'></i>");
 
   $('#js_w_icon').append("<p class='weather_name'>" +  app.condicionNombre.toUpperCase() + "</p>");
+  $('#city').append("<p class='Title'>" + city + "</p>");
 
 }
-app.obtenIcono = function(weatherIcon) {
-      var icon;
-      switch (weatherIcon) {
-        case "01d":
-        case "01n":
-         icon = "wi-day-sunny";
-        break;
-        case "02d":
-        case "02n":
-          icon = "wi-day-cloudy";
-        break;
-      }
-      return icon;
-    }
+app.obtenIcono = function( condicionIcono ) {
+  $.ajax({
+    url : 'http://openweathermap.org/img/w/'+ app.datos.weather.[0].icon +'.png'
+  });
+    console.log(url);
+   app.icon;
+  switch( condicionIcono ){
+    case "01d":
+    case "01n":
+    app.icon = "wi-day-sunny";
+    break;
+    case "02d":
+    case "02n":
+    app.icon = "wi-day-cloudy";
+    break;
 
+    case "03d":
+    case "03n":
+    app.icon = "wi-cloud";
+    break;
+
+    case "04d":
+    case "04n":
+    app.icon = "wi-cloudy";
+    break;
+
+    case "09d":
+    case "09n":
+    app.icon = "wi-rain";
+    break;
+
+    case "10d":
+    case "10n":
+    app.icon = "wi-day-rain-mix";
+    break;
+
+    case "11d":
+    case "11n":
+    app.icon = "wi-thunderstorm";
+    break;
+
+    case "13d":
+    case "13n":
+    app.icon = "wi-snow";
+    break;
+
+    case "50d":
+    case "50n":
+    app.icon = "wi-fog";
+    break;
+
+    default:
+    app.icon = "wi-day-sunny";
+    break;
+
+  }
+
+  return app.icon;
+}
 
 
 app.localizacion();
