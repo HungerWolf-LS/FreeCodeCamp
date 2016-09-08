@@ -69,6 +69,10 @@
     </div></div></div>
     </section>
     <hr>
+    <div align="center">
+    <a class="btn btn-primary" id="switcharoo"> Change the Angular Unit</a>
+    </div>
+    <hr>
 
 
 <nav class="navbar  navbar-fixed-bottom">
@@ -127,7 +131,7 @@ app.localizacion = function(){
     //console.log(ciudad);
       //app.localizacion();
     $.ajax({
-      url: 'http://api.openweathermap.org/data/2.5/weather?q='+ city + '&appid=f3bf2022915855846550162e355ce1f9',
+      url: 'http://api.openweathermap.org/data/2.5/weather?q='+ city + '&units=metric&appid=f3bf2022915855846550162e355ce1f9',
       success: function (data) {
         app.datos = data;
         app.procesaDatos();
@@ -150,7 +154,7 @@ app.procesaDatos = function(){
 app.muestra = function(){
   $('#js_w_temp').append("<p class='weather_temperature'>" +  app.temperatura + "º</p>");
   $('#js_w_icon').append(" <i class='wi " + app.icono + "'></i>");
-  console.log(app.icono);
+  //console.log(app.icono);
 
   $('#js_w_icon').append("<p class='weather_name'>" +  app.condicionNombre.toUpperCase() + "</p>");
   $('#city').append("<p class='Title'>" + city + "</p>");
@@ -212,6 +216,15 @@ app.obtenIcono = function( condicionIcono ) {
 
   return app.icon;
 }
+
+$(document).ready(function(){
+
+  $("#switcharoo").on("click",function(){
+
+    console.log("Hola soy cambio c:");
+  });
+
+});
 
 
 app.localizacion();
