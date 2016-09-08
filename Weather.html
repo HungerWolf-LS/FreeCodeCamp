@@ -98,6 +98,7 @@
 <script type="text/javascript">
 var app = {};
 
+var medida = "metric";
 
 
 app.apikey = "3e721e227b5c28d8ff5691e4fff1c36";
@@ -105,6 +106,14 @@ app.apikey = "3e721e227b5c28d8ff5691e4fff1c36";
 //app.url = "http://api.openweathermap.org/data/2.5/find?lat=10.44&lon=-66.902618&cnt=10.51271&appid=f3bf2022915855846550162e355ce1f9";
 app.url2 ="http://ip-api.com/json";
 
+$(document).ready(function(){
+
+  $("#switcharoo").on("click",function(){
+    medida = "imperial";
+    app.localizacion();
+  });
+
+});
 
 app.localizacion = function(){
   
@@ -131,7 +140,7 @@ app.localizacion = function(){
     //console.log(ciudad);
       //app.localizacion();
     $.ajax({
-      url: 'http://api.openweathermap.org/data/2.5/weather?q='+ city + '&units=metric&appid=f3bf2022915855846550162e355ce1f9',
+      url: 'http://api.openweathermap.org/data/2.5/weather?q='+ city + '&units='+ medida +'&appid=f3bf2022915855846550162e355ce1f9',
       success: function (data) {
         app.datos = data;
         app.procesaDatos();
@@ -217,14 +226,6 @@ app.obtenIcono = function( condicionIcono ) {
   return app.icon;
 }
 
-$(document).ready(function(){
-
-  $("#switcharoo").on("click",function(){
-
-    console.log("Hola soy cambio c:");
-  });
-
-});
 
 
 app.localizacion();
