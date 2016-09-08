@@ -110,7 +110,7 @@ $(document).ready(function(){
 
   $("#switcharoo").on("click",function(){
     medida = "imperial";
-    app.localizacion();
+    app.cargaDatos();
   });
 
 });
@@ -161,7 +161,7 @@ app.procesaDatos = function(){
      }
 
 app.muestra = function(){
-  $('#js_w_temp').append("<p class='weather_temperature'>" +  app.temperatura + "º</p>");
+  $('#js_w_temp').append ("<p class='weather_temperature'>" +  app.temperatura + "º</p>");
   $('#js_w_icon').append(" <i class='wi " + app.icono + "'></i>");
   //console.log(app.icono);
 
