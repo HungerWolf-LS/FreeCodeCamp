@@ -70,8 +70,10 @@
     </section>
     <hr>
     <div align="center">
-    <a class="btn btn-primary" id="switcharoo"> Change the Angular Unit</a>
+    <a class="btn btn-primary" id="switcharooToFaren"> Change the Angular Unit to Fahrenheit</a>
+    <a class="btn btn-primary" id="switcharooToCel"> Change the Angular Unit to Celsius</a>
     </div>
+    
     <hr>
 
 
@@ -108,8 +110,17 @@ app.url2 ="http://ip-api.com/json";
 
 $(document).ready(function(){
 
-  $("#switcharoo").on("click",function(){
+  $("#switcharooToFaren").on("click",function(){
     medida = "imperial";
+    app.cargaDatos();
+  });
+
+});
+
+$(document).ready(function(){
+
+  $("#switcharooToCel").on("click",function(){
+    medida = "metric";
     app.cargaDatos();
   });
 
@@ -161,12 +172,12 @@ app.procesaDatos = function(){
      }
 
 app.muestra = function(){
-  $('#js_w_temp').append ("<p class='weather_temperature'>" +  app.temperatura + "º</p>");
-  $('#js_w_icon').append(" <i class='wi " + app.icono + "'></i>");
+  $('#js_w_temp').empty().append ("<p class='weather_temperature'>" +  app.temperatura + "º</p>");
+  $('#js_w_icon').empty().append(" <i class='wi " + app.icono + "'></i>");
   //console.log(app.icono);
 
   $('#js_w_icon').append("<p class='weather_name'>" +  app.condicionNombre.toUpperCase() + "</p>");
-  $('#city').append("<p class='Title'>" + city + "</p>");
+  $('#city').empty().append("<p class='Title'>" + city + "</p>");
 
 }
 app.obtenIcono = function( condicionIcono ) {
