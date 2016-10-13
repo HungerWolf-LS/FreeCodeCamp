@@ -46,7 +46,7 @@
 <div class="col-md-12">
 <div class="page-header">
 <div id="Wikipedia">
-<h1 id="containers" class="title"> <i class="fa fa-wikipedia-w fa-3x" aria-hidden="true"> </i></h1>
+<h1 id="containers" class="title"><a href="https://en.wikipedia.org/wiki/Special:Random" target="blank"> <i class="fa fa-wikipedia-w fa-3x" aria-hidden="true"> </i></a></h1>
 <h2 id="containers" class="title"> Search in Wikipedia! </h2>
  
   <hr>
@@ -61,6 +61,9 @@
 <input class="form-control" type="text" id="busqueda">
 <span class="input-group-btn">
 <button class="btn btn-default" type="button" id="searchB"> Search </button>
+<ul id="result"> 
+
+</ul>
 <section class="section__main">
 <div class="section__content">
 </div>  
@@ -87,4 +90,27 @@
 <script type="text/javascript">
 /*Este link abre un articulo aleatorio en wikipedia https://en.wikipedia.org/wiki/Special:Random*/ 
 /*https://www.youtube.com/watch?v=PFrzq01h4m0*/
+    $(document).ready(function(){
+
+      $("#searchB").click(function(){
+
+        var searchWord = $("#busqueda").val();
+
+        var url = "https://en.wikipedia.org/w/api.php?action=opensearch&search=" + searchWord + "&format=json&callback=?";
+
+        $.ajax({
+          type:"GET",
+          url: url,
+          async: false,
+          dataType: "json",
+          success: function(data){
+            console.log(url);
+          },
+          error: function(errorMessage){
+            alert("Error");
+          }
+        });
+      });
+
+});
 </script>
