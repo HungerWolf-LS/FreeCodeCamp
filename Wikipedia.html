@@ -61,21 +61,21 @@
 <input class="form-control" type="text" id="busqueda">
 <span class="input-group-btn">
 <button class="btn btn-default" type="button" id="searchB"> Search </button>
-<ul id="result"> 
 
-</ul>
 <section class="section__main">
 <div class="section__content">
 </div>  
 </div>
-</div></div></div>
+</div>
+</div>
+</div>
 </section>
 <hr>
-
 </div>
 </div>
 </div>
-
+<div id="resultado_title">
+</div>
 <nav class="navbar  navbar-fixed-bottom">
 <div class="text-center">
 <a class="btn btn-default" href="https://github.com/HungerWolf-LS/"> GitHub</a>
@@ -104,7 +104,10 @@
           async: false,
           dataType: "json",
           success: function(data){
-            console.log(url);
+            $("#resultado_title").html("");
+            for(var i=0;i<data[1].length;i++){
+            $("#resultado_title").prepend("<li><a href=" + data[3][i]+">"+ data[1][i] + "</a><p>"+data[2][i]+"</p></li>");
+          }
           },
           error: function(errorMessage){
             alert("Error");
