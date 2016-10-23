@@ -3,6 +3,7 @@
 <head>
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"/>
 <link rel="stylesheet" href="Estilos.css"/>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lobster">
 <link rel="stylesheet" type="text/css" href="http://bootswatch.com/darkly/bootstrap.min.css"> 
 <link rel="stylesheet" type="text/css" href="font-awesome-4.6.3">
@@ -75,6 +76,37 @@ Status:
 </body>
 </html>
 <script type="text/javascript">
-  
+ 
+
+ $(document).ready(function(){ // Inicio Jquery
+  //Free Code Camp Info and status api call
+//var url= "https://api.twitch.tv/kraken/streams/freecodecamp"; Al parecer ya no es funcional
+  var url = "https://wind-bow.hyperdev.space/twitch-api/kraken/streams/freecodecamp";
+  /*$.getJSON(url,function(data1){
+    if(data1.stream === null){
+      $("#status").html("Free Code Camp is Currently Offline");
+    }else{
+      $("#status").html("Free Code Camp is Currently Online!")
+    }
+
+  })
+
+ });*/
+ $.ajax({
+  type: 'GET',
+  url: "https://api.twich.tv./kraken/streams/freecodecamp",
+  header:{
+    'Client-ID': 'f6hsguvib0ydn65q7xhdi5odgd1gt2v'
+  },
+  success: function(data1){
+    console.log(data1);
+     /*if(data1.stream === null){
+      $("#status").html("Free Code Camp is Currently Offline");
+    }else{
+      $("#status").html("Free Code Camp is Currently Online!")
+    }*/
+  }
+
+ });
   /*https://www.youtube.com/watch?v=BvPmLSN1X5I*/ /*TUTORIAL :D*/
 </script>
