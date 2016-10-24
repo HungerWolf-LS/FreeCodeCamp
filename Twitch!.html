@@ -85,7 +85,7 @@ Status:
  
 
  $(document).ready(function(){ // Inicio Jquery
-  
+  var following= [];
  $.ajax({
   type: 'GET',
   url: "https://api.twitch.tv./kraken/streams/freecodecamp",
@@ -93,7 +93,7 @@ Status:
     'Client-ID': 'f6hsguvib0ydn65q7xhdi5odgd1gt2v'
   },
   success: function(data1){
-    console.log(data1);
+    //console.log(data1);
     if(data1.stream === null){
       $("#status").html("The Stream is Currently ¡OFFLINE! Comeback Later");
     }else{
@@ -109,12 +109,45 @@ Status:
     'Client-ID': 'f6hsguvib0ydn65q7xhdi5odgd1gt2v'
   },
   success: function(data2){
-    console.log(data2);
+   // console.log(data2);
     for (var i=0; i<data2.follows.length; i++){
       var displayName = data2.follows[i].channel.display_name;
+      following.push(displayName);
+      following.push("ESL_SC2");
+      //following.push("Draktar301");
+      //following.push("user2");
+    
+  var url2 = 'https://api.twitch.tv/kraken/streams/'+ following[i] + '';
+  //console.log(url2);
+  $.ajax({
+    type: 'GET',
+    url: url2,
+    headers:{
+    'Client-ID': 'f6hsguvib0ydn65q7xhdi5odgd1gt2v'
+  },
+  success:function(data3){
+      for (var i=0; i<following.length; i++){
+      var logo;
+      var status;
+      var name;
+       // alert(data3);
+        if(data3.error){
+          logo = "https://s-media-cache-ak0.pinimg.com/236x/3b/a5/47/3ba547cd401fd27ad9c32fe5a7dccc74.jpg";
+          name = data2.message;
+          status = data2.error;
+
+          $("#followerInfo").prepend("<div class= 'row'" + "<div class='col-md-4'>" + "<img src='" + logo + "'>" + "</div>" + "<div class='col-md-4'>" + data2.message + "</div>" + "<div class='col-md-4'>" + data2.error + "</div></div>");
+        }
+          console.log(data3.error);
+      }
+     // console.log(following);
     }
+  });
+
+    }
+
   }
- })
+ });
 
 
  });
