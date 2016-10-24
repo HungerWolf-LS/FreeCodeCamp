@@ -46,8 +46,11 @@
 <div id ="header" class="text-center">
 <h1>Use The TwitchTV</h1>
 <h2>FreeCodeCamp</h2>
+<a href="https://www.twitch.tv/freecodecamp" target="blank">
 <h3 id ="status"></h3>
+</a>
 </div>
+
 <div class="row">
 <h1>
 <div class="col-md-4">
@@ -79,33 +82,37 @@ Status:
  
 
  $(document).ready(function(){ // Inicio Jquery
-  //Free Code Camp Info and status api call
-//var url= "https://api.twitch.tv/kraken/streams/freecodecamp"; Al parecer ya no es funcional
-  var url = "https://wind-bow.hyperdev.space/twitch-api/kraken/streams/freecodecamp";
-  /*$.getJSON(url,function(data1){
-    if(data1.stream === null){
-      $("#status").html("Free Code Camp is Currently Offline");
-    }else{
-      $("#status").html("Free Code Camp is Currently Online!")
-    }
-
-  })
-
- });*/
+  
  $.ajax({
   type: 'GET',
-  url: "https://api.twich.tv./kraken/streams/freecodecamp",
-  header:{
+  url: "https://api.twitch.tv./kraken/streams/freecodecamp",
+  headers:{
     'Client-ID': 'f6hsguvib0ydn65q7xhdi5odgd1gt2v'
   },
   success: function(data1){
     console.log(data1);
-     /*if(data1.stream === null){
-      $("#status").html("Free Code Camp is Currently Offline");
+    if(data1.stream === null){
+      $("#status").html("The Stream is Currently ¡OFFLINE! Comeback Later");
     }else{
-      $("#status").html("Free Code Camp is Currently Online!")
-    }*/
+      $("#status").html("The Stream is ¡ONLINE! Go and Check it!")
+    }
   }
+ });
+
+ $.ajax({
+  type: 'GET',
+  url: "https://api.twitch.tv./kraken/users/freecodecamp/follows/channels/",
+  headers:{
+    'Client-ID': 'f6hsguvib0ydn65q7xhdi5odgd1gt2v'
+  },
+  success: function(data2){
+    console.log(data2);
+    for (var i=0; i<data2.follows.length; i++){
+      var displayName = data2.follows[i].channel.display_name;
+    }
+  }
+ })
+
 
  });
   /*https://www.youtube.com/watch?v=BvPmLSN1X5I*/ /*TUTORIAL :D*/
