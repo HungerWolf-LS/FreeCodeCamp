@@ -3,6 +3,7 @@
 <head>
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"/>
 <link rel="stylesheet" href="Estilos.css"/>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lobster">
 <link rel="stylesheet" type="text/css" href="http://bootswatch.com/darkly/bootstrap.min.css"> 
 <link rel="stylesheet" type="text/css" href="font-awesome-4.6.3/css/font-awesome.min.css">
@@ -47,8 +48,11 @@
 <i class="fa fa-twitch fa-5x" aria-hidden="true"></i>
 <h1>Use The TwitchTV</h1>
 <h2>FreeCodeCamp</h2>
+<a href="https://www.twitch.tv/freecodecamp" target="blank">
 <h3 id ="status"></h3>
+</a>
 </div>
+
 </div>
 <div class="row">
 <h1>
@@ -78,6 +82,41 @@ Status:
 </body>
 </html>
 <script type="text/javascript">
+ 
+
+ $(document).ready(function(){ // Inicio Jquery
   
+ $.ajax({
+  type: 'GET',
+  url: "https://api.twitch.tv./kraken/streams/freecodecamp",
+  headers:{
+    'Client-ID': 'f6hsguvib0ydn65q7xhdi5odgd1gt2v'
+  },
+  success: function(data1){
+    console.log(data1);
+    if(data1.stream === null){
+      $("#status").html("The Stream is Currently ¡OFFLINE! Comeback Later");
+    }else{
+      $("#status").html("The Stream is ¡ONLINE! Go and Check it!")
+    }
+  }
+ });
+
+ $.ajax({
+  type: 'GET',
+  url: "https://api.twitch.tv./kraken/users/freecodecamp/follows/channels/",
+  headers:{
+    'Client-ID': 'f6hsguvib0ydn65q7xhdi5odgd1gt2v'
+  },
+  success: function(data2){
+    console.log(data2);
+    for (var i=0; i<data2.follows.length; i++){
+      var displayName = data2.follows[i].channel.display_name;
+    }
+  }
+ })
+
+
+ });
   /*https://www.youtube.com/watch?v=BvPmLSN1X5I*/ /*TUTORIAL :D*/
 </script>
