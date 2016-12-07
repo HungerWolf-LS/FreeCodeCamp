@@ -102,6 +102,7 @@
   /*https://www.youtube.com/watch?v=24UvjYFDID0*/
   /*TUTORIAL*/
   $(document).ready(function(){
+   
     var entrada=[""];
 
     var totalString;
@@ -122,38 +123,48 @@
       else if (operadores1.includes(entrada[entrada.length-1]) === false){
         entrada.push(input);
       }
-      else if(numeros.includes(Number(entrada))){
+      else if(numeros.includes(Number(input))){
         entrada.push(input);
       }
-
+      limpiar();
     }
 
     function limpiar(){
       totalString = entrada.join("");
       $("#steps").html(totalString);
+      console.log(entrada);
     }
 
     function conseguirTotal(){
       totalString = entrada.join("");
       $("#steps").html(eval(totalString));
     }
+
+
     $("a").on("click",function(){
+      
         if(this.id === "deleteAll"){
             entrada = [""];
             limpiar();
         }
+
         else if(this.id === "backOne"){
           entrada.pop();
           limpiar();
         }
+
         else if(this.id === "total"){
           conseguirTotal();
         }
+
         else{
+
+
             if(entrada[entrada.length-1].indexOf("+","-","*","/") === -1 ){
                 conseguirValor(this.id);
 
             }
+            
             else{
                 conseguirValor(this.id);
             }
