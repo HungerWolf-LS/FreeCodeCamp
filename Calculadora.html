@@ -112,9 +112,18 @@
 
     var numeros = [0,1,2,3,4,5,6,7,8,9];
 
-    function conseguirValor(entrada){
-      if(operadores2.includes(entrada[entrada.length-1] === true && entrada === ".")){
+    function conseguirValor(input){
+      if(operadores2.includes(entrada[entrada.length-1] === true && input === ".")){
           console.log("Duplicado '.' ");
+      }
+      else if(entrada.length === 1 && operadores1.includes(input) === false){
+        entrada.push(input);
+      }
+      else if (operadores1.includes(entrada[entrada.length-1]) === false){
+        entrada.push(input);
+      }
+      else if(numeros.includes(Number(entrada))){
+        entrada.push(input);
       }
 
     }
@@ -141,7 +150,7 @@
           conseguirTotal();
         }
         else{
-            if(entrada[entrada.length-1].indexOf("+","-","*","/","-1") === -1 ){
+            if(entrada[entrada.length-1].indexOf("+","-","*","/") === -1 ){
                 conseguirValor(this.id);
 
             }
