@@ -121,4 +121,15 @@ h1{
 	font-size: 24px;
 }
 
+/*#cuerpo {
+	background-image: url(https://unsplash.com/search/watch?photo=r-EecLdRRww);
+	}*/
 
+#cuerpo {
+	background-image: url(https://unsplash.com/search/watch?photo=r-EecLdRRww) !important;
+
+}
+
+h2 {
+	display: inline;
+}
