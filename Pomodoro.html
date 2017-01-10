@@ -54,14 +54,14 @@
 <div id="tempDIV" class="text-center">
 <h1 id="tit1">Session Time</h1>
 <a href="#" class="btn btn-danger" id="subTime">-</a>
-<h2 id="num">5</h2>
+<h2 id="num">25</h2>
 <a href="#" class="btn btn-primary" id="addTime">+</a>
 <a href="#" class="btn btn-success" id="reset">Reset</a> 
 </div>
 <div id="breakDiv" class="text-center">
   <h1 id="tit1">Break Time</h1>
 <a href="#" class="btn btn-danger" id="subBreak">-</a>
-<h2 id="num">5</h2>
+<h2 id="breakNum">5</h2>
 <a href="#" class="btn btn-primary" id="addBreak">+</a>
 </div>
 <div class="text-center">
@@ -83,27 +83,7 @@
 <a class="btn btn-default" href="https://plus.google.com/u/1/?hl=es">Google+</a>
 </div>
 </nav>
-
-
-
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -115,3 +95,43 @@
 
 </body>
 </html>
+<script type="text/javascript">
+  var sessNum = parseInt($("#num").html());
+  var brkNum = parseInt($("#breakNum").html());
+   //console.log(brkNum);
+  $(document).ready(function(){
+    $("#reset").hide();
+
+    $("#subTime").click(function(){ //Funcion que resta 5 a Session Time
+      if(sessNum > 5){
+        sessNum -= 5;
+    $("#num").html(sessNum);
+    }
+      });
+
+    $("#addTime").click(function(){ //Funcion que suma 5 a Sessin Time
+      sessNum += 5;
+    $("#num").html(sessNum);
+    });
+
+    $("#subBreak").click(function(){ //Funcion que resta 5 a break Time
+      if(brkNum > 5){
+        brkNum -= 5;
+      $("#breakNum").html(brkNum);
+      }
+
+    });
+    
+
+    
+    $("#addBreak").click(function(){ // Funcion que suma 5 a break time
+        brkNum += 5;
+    $("#breakNum").html(brkNum);
+    });
+
+
+
+
+    });
+  
+</script>
